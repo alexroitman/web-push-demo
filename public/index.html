@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Push Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .status {
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+      min-height: 2.75rem;
+    }
+    .status.info    { background: #1e3a5f; color: #93c5fd; border: 1px solid #1d4ed8; }
+    .status.success { background: #14532d; color: #86efac; border: 1px solid #16a34a; }
+    .status.error   { background: #450a0a; color: #fca5a5; border: 1px solid #dc2626; }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #btn-subscribe   { background: #3b82f6; color: #fff; }
+    #btn-subscribe:hover { background: #2563eb; }
+    #btn-unsubscribe { background: #475569; color: #cbd5e1; }
+    #btn-unsubscribe:hover:not(:disabled) { background: #64748b; }
+
+    #notify-section {
+      border-top: 1px solid #334155;
+      padding-top: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+
+    .field {
+      margin-bottom: 0.875rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.4rem;
+      color: #e2e8f0;
+      font-size: 0.875rem;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    #btn-send {
+      background: #10b981;
+      color: #fff;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    #btn-send:hover:not(:disabled) { background: #059669; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔔 Web Push Demo</h1>
+    <p class="subtitle">Prueba de notificaciones push con VAPID y Service Workers</p>
+
+    <div id="status" class="status info">Cargando…</div>
+
+    <div class="actions">
+      <button id="btn-subscribe">Activar notificaciones</button>
+      <button id="btn-unsubscribe" style="display:none">Desactivar</button>
+    </div>
+
+    <div id="notify-section" style="display:none">
+      <h2>Enviar notificación de prueba</h2>
+
+      <div class="field">
+        <label for="push-title">Título</label>
+        <input type="text" id="push-title" placeholder="Notificación de prueba" />
+      </div>
+
+      <div class="field">
+        <label for="push-body">Mensaje</label>
+        <input type="text" id="push-body" placeholder="Hola desde el servidor 👋" />
+      </div>
+
+      <div class="field">
+        <label for="push-url">URL al hacer click</label>
+        <input type="text" id="push-url" placeholder="https://ejemplo.com" />
+      </div>
+
+      <button id="btn-send">Enviar notificación</button>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
