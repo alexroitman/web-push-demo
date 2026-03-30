@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: web-push-demo
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: VAPID_PUBLIC_KEY
+        value: BJv1xajjiYgN3Tug-dNzg7CfnRqC17PrMHLiMX7N2o8sJ5U4HLw9ETz_DFBE6S2j2Ru75G4B28vuMLqma54_IPs
+      - key: VAPID_PRIVATE_KEY
+        value: nzpp2-2nbSHmYfhFV7u_hgVd61b7sOfp0JeBkD6xGss
+      - key: VAPID_MAILTO
+        value: mailto:admin@example.com
+      - key: PORT
+        value: 10000
